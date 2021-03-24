@@ -18,5 +18,6 @@ from django.urls import path
 from expert_data_dashboard.data_dashboard import views
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    path('result/', views.result, name='result')
 ]
