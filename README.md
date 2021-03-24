@@ -20,6 +20,12 @@ Read more <a href="https://help.data.world/hc/en-us/articles/115006114047-Adding
 
 
 
+Convert CSV to JSON or JSON to CSV:
+
+https://csvjson.com/
+
+
+
 Datasets in URL format:
 
 https://people.sc.fsu.edu/~jburkardt/data/csv/csv.html
