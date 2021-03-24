@@ -1,5 +1,7 @@
-from django.shortcuts import render,redirect
-from .forms import UploadLinkForm,ColumnsForm
+from django.shortcuts import render, redirect
+from .forms import UploadLinkForm, ColumnsForm
+import csv
+from io import StringIO
 
 # Create your views here.
 def index(request):
