@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect
 from .forms import UploadLinkForm, ColumnsForm
-import csv
 import json
+from csv import reader
+import csv
 import urllib.request
-
 from io import StringIO
 
 # Create your views here.
@@ -12,10 +12,14 @@ def index(request):
     form = UploadLinkForm()
     context['form'] = form
     if request.POST:
-        temp = request.POST.get('link_field', False)
-        response = urllib.request.urlopen(temp)
-        data = json.loads(response.read())
-        print(data)
+        url = request.POST.get('link_field', False)
+        response = urllib.request.urlopen(url)
+
+        # parse json object
+
+        # output some object attributes
+
+
         return redirect(result)
     return render(request, "index.html", context)
 
