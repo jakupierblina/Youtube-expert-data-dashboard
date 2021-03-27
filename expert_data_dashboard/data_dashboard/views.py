@@ -5,6 +5,7 @@ from .forms import UploadLinkForm, ColumnsForm
 import json
 from csv import reader
 import csv
+from collections import Counter
 import pandas as pd
 import requests
 import urllib.request
@@ -66,8 +67,23 @@ def readfile(filename):
 
 def result(request):
     context = {}
-    context['form'] = ColumnsForm()
-
-
+    form = ColumnsForm()
+    context['form'] = form
+    if request.GET:
+        chosen = request.GET['vizualization_field']
+        print(chosen)
+        context['chosen'] = chosen
 
     return render(request, "result.html", context)
+
+
+
+# get and return the prepared dictionary data from columns name of visualization
+def vizualization(name_input):
+    dashboard1 = []
+
+    for x in data[name_input]:
+        dashboard1.append(x)
+
+    my_dict = dict(Counter(dashboard1))
+    return my_dict

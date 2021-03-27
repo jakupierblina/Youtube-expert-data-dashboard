@@ -22,19 +22,19 @@
             <h2 style="margin-top: 30px; color: darkslategray; border-bottom: 2px black solid">Expert Data Dashboard</h2><br>
             <label>Please write your specifications!</label> <br>
                 <!----- Input form ------>
-                <form method = "GET" style="font-size: large; ">
+                <form method = "GET" style="font-size: large;">
                     <!----- Input form columns name ------>
-                    <div  style="margin: 10px; ">
-                         {{ form.columns_field.label }}
+                    <div  style="margin: 10px;">
+                         {{ form.columns_field.label }}<br>
                          {{ form.columns_field }} <br><br>
                     </div>
-                    <!----- Input form vizualization style------>
+                    <!----- Input form visualization style------>
                     <div  style="margin: 10px;">
                          {{ form.vizualization_field.label }}
                          {{ form.vizualization_field }}<br><br>
                     </div>
                     <!----- Input form button ------>
-                    <input type = "submit" value = "Ready!" class="btn btn-danger" style="height: 40px; width: 90%; font-size: medium; margin-top: 20px">
+                    <input type = "submit" value = "Refresh!" class="btn btn-danger" style="height: 40px; width: 90%; font-size: medium; margin-top: 20px">
                 </form>
         </div>
         <!----- Main section ------>
@@ -56,6 +56,8 @@
 
 <script>
     colorArray = [];
+
+
     while (colorArray.length < 1000)
     {
         colorArray.push("#" + ((1<<24)*Math.random() | 0).toString(16));

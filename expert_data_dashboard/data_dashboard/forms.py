@@ -7,7 +7,12 @@ class UploadLinkForm(forms.Form):
 
 
 # iterable
-COLUMNS_CHOICES = ( )
+COLUMNS_CHOICES = (
+     ("one", "One"),
+     ("two", "Two"),
+     ("three", "Three"),
+     ("four", "Four"),
+)
 
 VIZUALIZATION_CHOICES = (
      ("line", "Line"),
@@ -15,13 +20,11 @@ VIZUALIZATION_CHOICES = (
      ("pie", "Pie"),
      ("doughnut", "Doughnut"),
      ("radar", "Radar"),
-     ("polar", "Polar Area"),
-     ("bubble", "Bubble"),
-     ("scatter", "Scatter "),
+     ("polarArea", "Polar Area"),
 )
 
 
 # creating a form
 class ColumnsForm(forms.Form):
-     columns_field = forms.ChoiceField(choices=COLUMNS_CHOICES)
-     vizualization_field = forms.ChoiceField(choices=VIZUALIZATION_CHOICES)
+     columns_field = forms.ChoiceField(label='Columns name:', choices=COLUMNS_CHOICES)
+     vizualization_field = forms.ChoiceField(label='Vizualization style:', choices=VIZUALIZATION_CHOICES)
