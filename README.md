@@ -14,15 +14,13 @@ Working with DATA URLS the project idea is to easily get the URL parameters whic
 
 <h3> What is a URL Data? </h3>
 
-**Data URLs**, **URLs** prefixed with the **data**: scheme, allow content creators to embed small files inline in documents. Note: **Data URLs** are treated as unique opaque origins by modern browsers, rather than  inheriting the origin of the settings object responsible for the  navigation
-
-Read more <a href="https://help.data.world/hc/en-us/articles/115006114047-Adding-files-from-a-URL"> here</a>
+**Data URLs**, **URLs** prefixed with the **data**: scheme, allow content creators to embed small files inline in documents. Note: **Data URLs** are treated as unique opaque origins by modern browsers, rather than  inheriting the origin of the settings object responsible for the  navigation. Read more <a href="https://help.data.world/hc/en-us/articles/115006114047-Adding-files-from-a-URL"> here</a>
 
 
 
-Convert CSV to JSON or JSON to CSV:
+<h5>Convert CSV to JSON or JSON to CSV: <a href="https://csvjson.com/"> here</a> </h5>
 
-https://csvjson.com/
+
 
 
 

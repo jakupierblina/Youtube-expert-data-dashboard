@@ -3,6 +3,7 @@ from .forms import UploadLinkForm, ColumnsForm
 import json
 from csv import reader
 import csv
+import requests
 import urllib.request
 from io import StringIO
 
@@ -15,11 +16,15 @@ def index(request):
         url = request.POST.get('link_field', False)
         response = urllib.request.urlopen(url)
 
-        # parse json object
-
+        # parse the file object
+        req = requests.get(url)
+        print(req.url)
         # output some object attributes
-
-
+        filename = req.url[(url).rfind('/')+1:]
+        with open(filename, 'wb') as f:
+            for chunk in req.iter_content(chunk_size=8191):
+                if chunk:
+                    f.write(chunk)
         return redirect(result)
     return render(request, "index.html", context)
 
