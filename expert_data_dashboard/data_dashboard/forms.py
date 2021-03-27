@@ -1,11 +1,9 @@
 from django import forms
 from django.forms import URLInput
-
+import views
 
 class UploadLinkForm(forms.Form):
      link_field =  forms.URLField(label='Link:')
-
-
 
 
 # iterable

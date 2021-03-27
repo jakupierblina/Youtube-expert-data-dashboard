@@ -54,18 +54,20 @@ def readfile(filename):
     data = pd.DataFrame(data=my_file, index=None)
     print(data)
 
+    global columns
+    columns = {}
+    for col_name in data.columns:
+        columns[col_name] = col_name
+        print(col_name)
+
+    print('columns', columns)
+
 
 
 def result(request):
     context = {}
     context['form'] = ColumnsForm()
 
-    rows = len(data.axes[0])
-    columns = len(data.axes[1])
-
-
-    print('cols', columns)
-    print('rows', rows)
 
 
     return render(request, "result.html", context)
