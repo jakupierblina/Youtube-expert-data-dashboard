@@ -8,22 +8,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <!--- link css --->
+
 </head>
-<body >
-<div class="jumbotron text-center"  >
-  <h1>Expert Data Dashboard</h1><br>
-    <p> Please write the direct download link of datasets, either csv format or json format dataset. </p>
-</div>
+<body>
+    <!----- Main section title ------>
+    <div class="jumbotron text-center" >
+        <h1>Expert Data Dashboard</h1><br>
+        <p> Please write the direct download link of datasets, either csv format or json format dataset. </p>
+    </div>
 
-<div class="container" >
-  <div class="text-center" style="font-size: large">
-    <form method = "POST">
-        {% csrf_token %}
-        {{ form}}
-        <input type = "submit" value = "Submit" class="btn btn-danger" style="height: 40px">
-    </form>
-  </div>
-</div>
-
+    <!----- Input url section ------>
+    <div class="container" >
+      <div class="text-center" style="font-size: large">
+        <form method = "POST">
+            {% csrf_token %}
+            {{ form}}
+            <input type = "submit" value = "Submit" class="btn btn-danger" style="height: 40px">
+        </form>
+      </div>
+    </div>
 </body>
 </html>

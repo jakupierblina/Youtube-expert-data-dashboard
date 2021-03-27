@@ -1,19 +1,13 @@
 from django import forms
 from django.forms import URLInput
-import views
+
 
 class UploadLinkForm(forms.Form):
      link_field =  forms.URLField(label='Link:')
 
 
 # iterable
-GEEKS_CHOICES = (
-     ("1", "One"),
-     ("2", "Two"),
-     ("3", "Three"),
-     ("4", "Four"),
-     ("5", "Five"),
-)
+COLUMNS_CHOICES = ( )
 
 VIZUALIZATION_CHOICES = (
      ("line", "Line"),
@@ -29,5 +23,5 @@ VIZUALIZATION_CHOICES = (
 
 # creating a form
 class ColumnsForm(forms.Form):
-     columns_field = forms.ChoiceField(choices=GEEKS_CHOICES)
+     columns_field = forms.ChoiceField(choices=COLUMNS_CHOICES)
      vizualization_field = forms.ChoiceField(choices=VIZUALIZATION_CHOICES)
