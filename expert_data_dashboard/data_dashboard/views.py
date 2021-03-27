@@ -55,12 +55,12 @@ def readfile(filename):
     print(data)
 
     global columns
-    columns = {}
+    columns = []
     for col_name in data.columns:
-        columns[col_name] = col_name
-        print(col_name)
+        columns.append(col_name)
+        #print(col_name)
 
-    print('columns', columns)
+    print('columns', columns) # created the list of array with columns name
 
 
 
