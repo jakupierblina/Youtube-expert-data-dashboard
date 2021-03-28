@@ -71,22 +71,27 @@ def result(request):
     vizualization_form = VizualizationForm()
     context['vizualization_form'] = vizualization_form
 
-    ''' if there is a request submit'''
-    if request.GET:
-        chosen = request.GET['vizualization_field']
-        print(chosen)
-        context['chosen'] = chosen
-
-    #creating choices based on columns name
+    #creating choices based on columns name of the file
     columns_list = []
     for i in columns:
         columns_list.append((i, i))
-    print(columns_list)
+    #print(columns_list)
 
     columns_form = ColumnsForm(columns_list)
     context['columns_form'] = columns_form
 
+
+    if request.GET:
+        vizualization_choice = request.GET['vizualization_field']
+        columnsname_choice = request.GET['columns_field']
+        print('vizualization_choice', vizualization_choice)
+        print('columnsname_choice', columnsname_choice)
+        dashboard_dict = vizualization(columnsname_choice)
+        #print('dashboard_dict',dashboard_dict)
+
+
     return render(request, "result.html", context)
+
 
 
 
