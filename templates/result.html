@@ -25,13 +25,14 @@
                 <form method = "GET" style="font-size: large;">
                     <!----- Input form columns name ------>
                     <div  style="margin: 10px;">
-                         {{ form.columns_field.label }}<br>
-                         {{ form.columns_field }} <br><br>
+                         {{ columns_form.columns_field.label }}<br>
+
+                         {{ columns_form.columns_field }} <br><br>
                     </div>
                     <!----- Input form visualization style------>
                     <div  style="margin: 10px;">
-                         {{ form.vizualization_field.label }}
-                         {{ form.vizualization_field }}<br><br>
+                         {{ vizualization_form.vizualization_field.label }}
+                         {{ vizualization_form.vizualization_field }}<br><br>
                     </div>
                     <!----- Input form button ------>
                     <input type = "submit" value = "Refresh!" class="btn btn-danger" style="height: 40px; width: 90%; font-size: medium; margin-top: 20px">

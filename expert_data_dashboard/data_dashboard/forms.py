@@ -3,15 +3,12 @@ from django.forms import URLInput
 
 
 class UploadLinkForm(forms.Form):
-     link_field =  forms.URLField(label='Link:')
+     link_field = forms.URLField(label='Link:')
 
 
 # iterable
 COLUMNS_CHOICES = (
      ("one", "One"),
-     ("two", "Two"),
-     ("three", "Three"),
-     ("four", "Four"),
 )
 
 VIZUALIZATION_CHOICES = (
@@ -26,5 +23,11 @@ VIZUALIZATION_CHOICES = (
 
 # creating a form
 class ColumnsForm(forms.Form):
-     columns_field = forms.ChoiceField(label='Columns name:', choices=COLUMNS_CHOICES)
+     def __init__(self, columns_choices, *args, **kwargs):
+          super(ColumnsForm, self).__init__(*args, **kwargs)
+          self.fields['columns_field'].choices = columns_choices
+
+     columns_field = forms.ChoiceField(label='Columns name:', choices=())
+
+class VizualizationForm(forms.Form):
      vizualization_field = forms.ChoiceField(label='Vizualization style:', choices=VIZUALIZATION_CHOICES)
