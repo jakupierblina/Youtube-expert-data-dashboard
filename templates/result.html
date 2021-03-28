@@ -42,8 +42,8 @@
             <div class="row" style="margin: 10px;">
                 <!----- Title ------>
                 <div style="padding: 5px;">
-                     <h1>Something to bullshit</h1>
-                    <p>Dashboard - this is large</p>
+                     <h1>Data through URLs with Counter collector</h1><br>
+                    <p>Visualization format - {{ vizualization_default }}</p>
                 </div>
                 <!----- Chart   ------>
                 <div style="width: 70%; height: 50%; margin: 30px;">
@@ -56,28 +56,31 @@
 
 <script>
     colorArray = [];
-
     while (colorArray.length < 1000)
     {
         colorArray.push("#" + ((1<<24)*Math.random() | 0).toString(16));
     }
 
     new Chart(document.getElementById("pie-chart"), {
-    type: 'polarArea',
+    type: '{{ vizualization_default }}',
     data: {
-      labels:  ['12','13','14','15'],
+      labels:  {{ listkeys|safe }},
       datasets: [{
-        label: "",
-        backgroundColor: colorArray,
-          borderWidth: colorArray,
+         label: "",
+          fill: true,
+          backgroundColor: colorArray,
           borderColor: colorArray,
-        data: ['12','13','14','15']
+          pointBorderColor: colorArray,
+          pointBackgroundColor: colorArray,
+        data: {{ listvalues|safe }}
       }]
     },
+
+
     options: {
       title: {
         display: true,
-        text: 'Visualization'
+          text: 'Vizualization dashboard for {{ columnsname_choice|safe }}'
       }
     }
 });

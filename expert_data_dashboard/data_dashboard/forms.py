@@ -7,19 +7,14 @@ class UploadLinkForm(forms.Form):
 
 
 # iterable
-COLUMNS_CHOICES = (
-     ("one", "One"),
-)
-
 VIZUALIZATION_CHOICES = (
+     ("pie", "Pie"),
      ("line", "Line"),
      ("bar", "Bar"),
-     ("pie", "Pie"),
      ("doughnut", "Doughnut"),
      ("radar", "Radar"),
      ("polarArea", "Polar Area"),
 )
-
 
 # creating a form
 class ColumnsForm(forms.Form):

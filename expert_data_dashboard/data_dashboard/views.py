@@ -68,26 +68,70 @@ def readfile(filename):
 def result(request):
     context = {}
 
+    # create the ChartJs Choice field
     vizualization_form = VizualizationForm()
+    # pass the form in html
+    vizualization_default = 'pie'
+    context['vizualization_default'] = vizualization_default
     context['vizualization_form'] = vizualization_form
 
-    #creating choices based on columns name of the file
+
+    # creating choices based on columns name of the file
     columns_list = []
     for i in columns:
         columns_list.append((i, i))
-    #print(columns_list)
 
     columns_form = ColumnsForm(columns_list)
-    context['columns_form'] = columns_form
+    context['columns_form'] = columns_form # pass this list of choices in html template
+
+    dashboard_dict = vizualization(columns[0])
+    columnsname_choice = columns[0] # prepare the defaulted columns representation
+    context['columnsname_choice'] = columnsname_choice
+
+    print('default', dashboard_dict)
+    keys = dashboard_dict.keys()  # {'A121', 'A122', 'A124', 'A123'}
+    values = dashboard_dict.values()
+
+    listkeys = []
+    listvalues = []
+
+    for x in keys:
+        listkeys.append(x)
+
+    for y in values:
+        listvalues.append(y)
+
+    print('---->', listkeys)
+    print('---->', listvalues)
+    context['listkeys'] = listkeys
+    context['listvalues'] = listvalues
 
 
+    # if the page is been updated change the attributes
     if request.GET:
-        vizualization_choice = request.GET['vizualization_field']
         columnsname_choice = request.GET['columns_field']
-        print('vizualization_choice', vizualization_choice)
         print('columnsname_choice', columnsname_choice)
+        context['columnsname_choice'] = columnsname_choice # put this vizualization in the html title
         dashboard_dict = vizualization(columnsname_choice)
         #print('dashboard_dict',dashboard_dict)
+        keys = dashboard_dict.keys()
+        values = dashboard_dict.values()
+        for x in keys:
+            listkeys.append(x)
+
+        for y in values:
+            listvalues.append(y)
+
+        print('---->', listkeys)
+        print('---->', listvalues)
+        context['listkeys'] = listkeys
+        context['listvalues'] = listvalues
+
+
+        # choosen visualization style
+        vizualization_choice = request.GET['vizualization_field']
+        vizualization_default = vizualization_choice
+        context['vizualization_default'] = vizualization_default
 
 
     return render(request, "result.html", context)
