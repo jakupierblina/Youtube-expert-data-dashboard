@@ -1,10 +1,11 @@
 import os
 
 from django.shortcuts import render, redirect
-from .forms import UploadLinkForm, ColumnsForm
+from .forms import UploadLinkForm, ColumnsForm, VizualizationForm
 import json
 from csv import reader
 import csv
+from collections import Counter
 import pandas as pd
 import requests
 import urllib.request
@@ -66,8 +67,35 @@ def readfile(filename):
 
 def result(request):
     context = {}
-    context['form'] = ColumnsForm()
 
+    vizualization_form = VizualizationForm()
+    context['vizualization_form'] = vizualization_form
 
+    ''' if there is a request submit'''
+    if request.GET:
+        chosen = request.GET['vizualization_field']
+        print(chosen)
+        context['chosen'] = chosen
+
+    #creating choices based on columns name
+    columns_list = []
+    for i in columns:
+        columns_list.append((i, i))
+    print(columns_list)
+
+    columns_form = ColumnsForm(columns_list)
+    context['columns_form'] = columns_form
 
     return render(request, "result.html", context)
+
+
+
+# get and return the prepared dictionary data from columns name of visualization
+def vizualization(name_input):
+    dashboard1 = []
+
+    for x in data[name_input]:
+        dashboard1.append(x)
+
+    my_dict = dict(Counter(dashboard1))
+    return my_dict

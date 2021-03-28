@@ -17,31 +17,32 @@
     <!----- Main section ------>
     <div class="row" >
         <!----- Side bar menu ------>
-        <div class="col-sm-4" style="background-color: lightgray; height: 684px;  width: 20%" >
+        <div class="col-sm-4" style=" padding: 10px; background-color: lightgray; height: 684px;  width: 20%" >
             <!----- Header Logo ------>
             <h2 style="margin-top: 30px; color: darkslategray; border-bottom: 2px black solid">Expert Data Dashboard</h2><br>
             <label>Please write your specifications!</label> <br>
                 <!----- Input form ------>
-                <form method = "GET" style="font-size: large; ">
+                <form method = "GET" style="font-size: large;">
                     <!----- Input form columns name ------>
-                    <div  style="margin: 10px; ">
-                         {{ form.columns_field.label }}
-                         {{ form.columns_field }} <br><br>
-                    </div>
-                    <!----- Input form vizualization style------>
                     <div  style="margin: 10px;">
-                         {{ form.vizualization_field.label }}
-                         {{ form.vizualization_field }}<br><br>
+                         {{ columns_form.columns_field.label }}<br>
+
+                         {{ columns_form.columns_field }} <br><br>
+                    </div>
+                    <!----- Input form visualization style------>
+                    <div  style="margin: 10px;">
+                         {{ vizualization_form.vizualization_field.label }}
+                         {{ vizualization_form.vizualization_field }}<br><br>
                     </div>
                     <!----- Input form button ------>
-                    <input type = "submit" value = "Ready!" class="btn btn-danger" style="height: 40px; width: 90%; font-size: medium; margin-top: 20px">
+                    <input type = "submit" value = "Refresh!" class="btn btn-danger" style="height: 40px; width: 90%; font-size: medium; margin-top: 20px">
                 </form>
         </div>
         <!----- Main section ------>
         <div class="col-sm-8">
-            <div class="row">
+            <div class="row" style="margin: 10px;">
                 <!----- Title ------>
-                <div>
+                <div style="padding: 5px;">
                      <h1>Something to bullshit</h1>
                     <p>Dashboard - this is large</p>
                 </div>
@@ -56,6 +57,7 @@
 
 <script>
     colorArray = [];
+
     while (colorArray.length < 1000)
     {
         colorArray.push("#" + ((1<<24)*Math.random() | 0).toString(16));
