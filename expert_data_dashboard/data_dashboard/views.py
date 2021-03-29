@@ -71,7 +71,7 @@ def result(request):
     # create the ChartJs Choice field
     vizualization_form = VizualizationForm()
     # pass the form in html
-    vizualization_default = 'pie'
+    vizualization_default = 'bar'
     context['vizualization_default'] = vizualization_default
     context['vizualization_form'] = vizualization_form
 
@@ -80,6 +80,7 @@ def result(request):
     columns_list = []
     for i in columns:
         columns_list.append((i, i))
+    # columns_list = ( ('x1','x1'), ('x2','x2)) ....
 
     columns_form = ColumnsForm(columns_list)
     context['columns_form'] = columns_form # pass this list of choices in html template
