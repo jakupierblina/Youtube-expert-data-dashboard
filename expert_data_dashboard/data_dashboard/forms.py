@@ -25,4 +25,4 @@ class ColumnsForm(forms.Form):
      columns_field = forms.ChoiceField(label='Columns name:', choices=())
 
 class VizualizationForm(forms.Form):
-     vizualization_field = forms.ChoiceField(label='Vizualization style:', choices=VIZUALIZATION_CHOICES)
+     vizualization_field = forms.ChoiceField(label='Visualization style:', choices=VIZUALIZATION_CHOICES)

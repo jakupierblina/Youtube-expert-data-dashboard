@@ -31,14 +31,14 @@ def index(request):
 def download(url: str):
     global completename
     req = requests.get(url)
-    print(req.url)
+    #print(req.url)
     # output some object attributes
     filename = req.url[(url).rfind('/') + 1:]
 
     #save the file in data folder
     folder = 'data'
     completename = os.path.join(folder,filename )
-    print(completename) #saving the file in folder name data
+   # print(completename) #saving the file in folder name data
     with open(completename, 'wb') as f:
         for chunk in req.iter_content(chunk_size=8191):
             if chunk:
@@ -53,7 +53,7 @@ def readfile(filename):
     my_file = pd.read_csv(filename, sep='[:;,|_]', engine='python')
 
     data = pd.DataFrame(data=my_file, index=None)
-    print(data)
+    #print(data)
 
     global columns
     columns = []
@@ -61,7 +61,7 @@ def readfile(filename):
         columns.append(col_name)
         #print(col_name)
 
-    print('columns', columns) # created the list of array with columns name
+    #print('columns', columns) # created the list of array with columns name
 
 
 
@@ -88,7 +88,7 @@ def result(request):
     columnsname_choice = columns[0] # prepare the defaulted columns representation
     context['columnsname_choice'] = columnsname_choice
 
-    print('default', dashboard_dict)
+    #print('default', dashboard_dict)
     keys = dashboard_dict.keys()  # {'A121', 'A122', 'A124', 'A123'}
     values = dashboard_dict.values()
 
@@ -101,8 +101,8 @@ def result(request):
     for y in values:
         listvalues.append(y)
 
-    print('---->', listkeys)
-    print('---->', listvalues)
+    #print('---->', listkeys)
+    #print('---->', listvalues)
     context['listkeys'] = listkeys
     context['listvalues'] = listvalues
 
@@ -110,10 +110,15 @@ def result(request):
     # if the page is been updated change the attributes
     if request.GET:
         columnsname_choice = request.GET['columns_field']
-        print('columnsname_choice', columnsname_choice)
+        #print('columnsname_choice', columnsname_choice)
         context['columnsname_choice'] = columnsname_choice # put this vizualization in the html title
+
         dashboard_dict = vizualization(columnsname_choice)
         #print('dashboard_dict',dashboard_dict)
+
+        listkeys = []
+        listvalues = []
+
         keys = dashboard_dict.keys()
         values = dashboard_dict.values()
         for x in keys:
@@ -122,8 +127,8 @@ def result(request):
         for y in values:
             listvalues.append(y)
 
-        print('---->', listkeys)
-        print('---->', listvalues)
+        #print('---->', listkeys)
+        #print('---->', listvalues)
         context['listkeys'] = listkeys
         context['listvalues'] = listvalues
 
