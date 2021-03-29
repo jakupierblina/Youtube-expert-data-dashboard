@@ -8,7 +8,7 @@ Working with DATA URLS the project idea is to easily get the URL parameters whic
 
 
 
-*** Note the project can read format or CSV format** *****
+*** Note the project can read Data Frame format** *****
 
 
 
@@ -35,3 +35,14 @@ https://support.spatialkey.com/spatialkey-sample-csv-data/
 First look on the project:
 
 <img src="jJeD0EjEAq.gif">
+
+
+
+
+
+
+
+<h3>Future modification update;</h3>
+
+So in the project is good to add Ajax so the results page will not be reload each time we change the input, Other than that can make the application read also JSON format of data.
+
