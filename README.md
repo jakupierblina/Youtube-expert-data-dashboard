@@ -1,4 +1,4 @@
-# expert_data_dashboard
+# Expert Data Dashboard
 
 
 
@@ -8,7 +8,7 @@ Working with DATA URLS the project idea is to easily get the URL parameters whic
 
 
 
-*** Note the project can read JSON format or CSV format** *****
+*** Note the project can read format or CSV format** *****
 
 
 
@@ -30,3 +30,8 @@ https://people.sc.fsu.edu/~jburkardt/data/csv/csv.html
 
 https://support.spatialkey.com/spatialkey-sample-csv-data/
 
+
+
+First look on the project:
+
+<img src="jJeD0EjEAq.gif">
