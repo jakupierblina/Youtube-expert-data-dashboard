@@ -1,7 +1,9 @@
 import os
 
+from django.contrib import messages
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import UploadLinkForm, ColumnsForm, VizualizationForm
+from .forms import UploadFileForm, UploadLinkForm, ColumnsForm, VizualizationForm
 import json
 from csv import reader
 import csv
@@ -14,17 +16,48 @@ from io import StringIO
 # Create your views here.
 def index(request):
     context = {}
-    form = UploadLinkForm()
-    context['form'] = form
+
 
     if request.POST:
-        url = request.POST.get('link_field', False)
-        response = urllib.request.urlopen(url)
+        link_form = UploadLinkForm(request.POST, prefix="link")
+        file_form = UploadFileForm(request.POST, prefix="file")
+        if link_form.is_valid() or file_form.is_valid():
 
-        # parse the file object
-        download(url)
-        return redirect(result)
-    return render(request, "index.html", context)
+            url = request.POST.get('link_field', False)
+            file = request.POST.get('file', False)
+
+            # if both forms are empty
+            if not file and not url:
+                messages.warning(request, 'Warning: Input is required. Please chose only ONE of the forms!')
+                return redirect(index)
+
+            # if the user choosed both forms
+            if file and url:
+                messages.warning(request, 'Warning:  Please chose only ONE of the forms!')
+                return redirect(index)
+
+
+            # if user chosed a link
+            if not file:
+                print('you chosed to upload a link')
+                response = urllib.request.urlopen(url)
+                # parse the file object
+                download(url)
+                return redirect(result)
+
+            # if user chosed a file
+            elif not url:
+                print('you chosed to upload a file')
+                return HttpResponse('<html><body>111 </body></html>')
+
+
+    # starting
+    else:
+        link_form = UploadLinkForm()
+        context['link_form'] = link_form
+        file_form = UploadFileForm()
+        context['file_form'] = file_form
+        return render(request, "index.html", context)
 
 
 

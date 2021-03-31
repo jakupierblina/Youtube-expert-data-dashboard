@@ -1,9 +1,11 @@
 from django import forms
 from django.forms import URLInput
 
+class UploadFileForm(forms.Form):
+    file = forms.FileField(label='File:', required=False)
 
 class UploadLinkForm(forms.Form):
-     link_field = forms.URLField(label='Link:')
+     link_field = forms.URLField(label='Link:', required=False)
 
 
 # iterable
