@@ -14,19 +14,36 @@
 </head>
 <body>
     <!----- Main section title ------>
-    <div class="jumbotron text-center" >
+    <div class="jumbotron text-center" style="background-color: darkslategray; color: white"  >
         <h1>Expert Data Dashboard</h1><br>
-        <label> Please write the direct download link of datasets, either csv format or <label style="text-decoration: line-through;">json format</label> dataset. </label>
+        <h3> Please write the direct download raw link of datasets or upload the csv file format of dataset. </h3>
     </div>
 
     <!----- Input url section ------>
     <div class="container" >
-      <div class="text-center" style="font-size: large">
-        <form method = "POST">
+      <div class="row" style="font-size: large">
+        <form method = "POST" style=" margin: auto; width: 60%;  padding: 40px;">
             {% csrf_token %}
-            {{ form }}
-            <input type = "submit" value = "Submit" class="btn btn-danger" style="height: 40px">
+            {{ link_form }} <br>
+            {{ file_form }} <br>
+            <input type = "submit" value = "Submit" class="btn" style="height: 40px; width: 300px; background-color: darkslategray; color: white; font-size: large;">
         </form>
+      <div class="message"  style=" margin: auto; width: 60%;  padding: 20px;">
+            {% block message %}
+
+            <!--- upload status message ---->
+            {% if messages %}
+              <div style="color: darkred; padding: 10px; background-color: lightpink">
+                {% for message in messages %}
+                  <p class="{{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+        {% endblock %}
+
+      </div>
+
       </div>
     </div>
 </body>
