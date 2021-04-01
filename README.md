@@ -8,6 +8,42 @@ Working with DATA URLS or/and file upload the project idea is to easily get the 
 
 
 
+We tried all the use case files, and all of them are readable to the program.  
+
+We did not clearly understood the context in each those folder-files but we did visualization based on the column the user chooses.  Bellow can see the test case list.
+
+
+
+<b>Importat: </b>
+
+<b>Due to lack of time we are submiting the project, but there can be some future modifications like adding Ajax to not reload the files each time we choose a new atribute. Other than that there is easy to add another filter to visualise more than one attribute. For example if the user wants to see how many womans has diabets, or how many males smokes etc, we strongly think that if it was a bit more time we would mange to finish this part as well. </b>
+
+Moto: We care for both, front-end and back-end 
+
+
+
+> *****
+>
+> Keep in mind:  
+>
+> To run the project you must have python installed in your PC. 
+>
+> Check the requrments.txt file there is a list of the libraries we used to make the project.
+>
+>  Need to install the libraries, and then will be able to run the project by:
+>
+>   - open cmd and go to the project directory
+>
+>   - execute: python manage.py runserver
+>
+>   - open the localhost link and will be able to see how the project behaves.
+>
+>     
+>
+> ***
+
+
+
 
 
 <h1>Test Cases:</h1>
@@ -103,14 +139,14 @@ Working with DATA URLS or/and file upload the project idea is to easily get the 
 	- [X] ATMEMRI
 	- [X] QYTETI
 	- [X] ATMADRESA
-	- [] BILANCI_TOTAL
-	- [] NUMRI_INCOMING_TRANSACTIONS
-	- [] NUMRI_OUTGOING_TRANSACTIONS
-	- [] INCOME_TOTAL
-	- [] OUTCOME_TOTAL
-	- [] NUMRI_TOTAL_TRANSACTIONS
-	- [] DATA
-	- [] KOHA_TRANSAKCIONIT
+	- [x] BILANCI_TOTAL
+	- [x] NUMRI_INCOMING_TRANSACTIONS
+	- [x] NUMRI_OUTGOING_TRANSACTIONS
+	- [x] INCOME_TOTAL
+	- [x] OUTCOME_TOTAL
+	- [x] NUMRI_TOTAL_TRANSACTIONS
+	- [x] DATA
+	- [x] KOHA_TRANSAKCIONIT
 
 
 
@@ -126,7 +162,7 @@ Working with DATA URLS or/and file upload the project idea is to easily get the 
 	- [X] LLOJI PUNESIMIT
 	- [X] ZONA JETES
 	- [X] MESATARJA_GLUKOZES_NIVELI
-	- [] BMI
+	- [x] BMI
 	- [X] DUHANPIRJA
 	- [X] INFRAKT
 	
@@ -140,7 +176,7 @@ Working with DATA URLS or/and file upload the project idea is to easily get the 
 	- [X] POPUPLLATION
 	- [X] SUICES/100K POP
 	- [X] COUNTRY-YEAR
-	- [] HDI FOR YEAR
+	- [x] HDI FOR YEAR
 	- [X] GDP_FOR_YEAR($)
 	- [X] GDP_PER_CAPTA($)
 	- [X] GENERATION
@@ -149,6 +185,18 @@ Working with DATA URLS or/and file upload the project idea is to easily get the 
 
 *******Kategoria Art/Entertainment:*******
 - [] Movie_Analytics - 20 pike bonus
+	- [X] ID
+	- [X] TIPI
+	- [x] TITULLI
+	- [] REGJISORI
+	- [] AKTORET
+	- [X] SHTETI
+	- [x] KOHA_E_SHTUAR_PLATFORME
+	- [x] VITI_LESHIMIT
+	- [x] RITING
+	- [x] KOHEZGJATJA
+	- [x] LISTUAR_NE_KATEGORINE
+	- [] PERSHRKIMI
 
 
 
