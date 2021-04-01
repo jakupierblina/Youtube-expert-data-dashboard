@@ -14,7 +14,7 @@
 </head>
 <body>
     <!----- Main section title ------>
-    <div class="jumbotron text-center" style="background-color: darkslategray; color: white"  >
+    <div class="jumbotron text-center"  >
         <h1>Expert Data Dashboard</h1><br>
         <h3> Please write the direct download raw link of datasets or upload the csv file format of dataset. </h3>
     </div>
@@ -22,11 +22,16 @@
     <!----- Input url section ------>
     <div class="container" >
       <div class="row" style="font-size: large">
-        <form method = "POST" style=" margin: auto; width: 60%;  padding: 40px;">
+        <form method = "POST" style=" margin: auto; width: 60%;  padding: 40px;" enctype="multipart/form-data">
             {% csrf_token %}
-            {{ link_form }} <br>
-            {{ file_form }} <br>
-            <input type = "submit" value = "Submit" class="btn" style="height: 40px; width: 300px; background-color: darkslategray; color: white; font-size: large;">
+            <div class="row container" style="margin-bottom: 10px">
+                <div class="col">
+                     {{ link_form }}<br><br>
+                    <label>File Upload: </label>
+                      <input type="file" name="document" id="document" ><br>
+                </div>
+            </div>
+            <input type = "submit" value = "Submit" class="btn" style="height: 50px; width: 300px; background-color: cadetblue; color: white; font-size: large;">
         </form>
       <div class="message"  style=" margin: auto; width: 60%;  padding: 20px;">
             {% block message %}

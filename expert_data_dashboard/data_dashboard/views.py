@@ -3,14 +3,16 @@ import os
 from django.contrib import messages
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .forms import UploadFileForm, UploadLinkForm, ColumnsForm, VizualizationForm
-import json
-from csv import reader
-import csv
+from .forms import  UploadLinkForm, ColumnsForm, VizualizationForm
+from .models import UploadLinkModel
+from django.core.files.storage import FileSystemStorage
+
 from collections import Counter
 import pandas as pd
 import requests
 import urllib.request
+from django.conf import settings
+
 from io import StringIO
 
 # Create your views here.
@@ -18,27 +20,33 @@ def index(request):
     context = {}
 
 
-    if request.POST:
-        link_form = UploadLinkForm(request.POST, prefix="link")
-        file_form = UploadFileForm(request.POST, prefix="file")
-        if link_form.is_valid() or file_form.is_valid():
+    if request.method == 'POST':
+
+        link_form = UploadLinkForm(request.POST)
+        uploaded_file = request.FILES['document']
+
+
+        if link_form.is_valid() or uploaded_file :
 
             url = request.POST.get('link_field', False)
-            file = request.POST.get('file', False)
+
+            files_name = uploaded_file.name
+
+
 
             # if both forms are empty
-            if not file and not url:
+            if not files_name and not url:
                 messages.warning(request, 'Warning: Input is required. Please chose only ONE of the forms!')
                 return redirect(index)
 
-            # if the user choosed both forms
-            if file and url:
+            # if the user chosed both forms
+            if files_name and url:
                 messages.warning(request, 'Warning:  Please chose only ONE of the forms!')
                 return redirect(index)
 
 
             # if user chosed a link
-            if not file:
+            if not files_name:
                 print('you chosed to upload a link')
                 response = urllib.request.urlopen(url)
                 # parse the file object
@@ -48,16 +56,51 @@ def index(request):
             # if user chosed a file
             elif not url:
                 print('you chosed to upload a file')
-                return HttpResponse('<html><body>111 </body></html>')
+                if uploaded_file.name.endswith('.csv'):
+                    savefile = FileSystemStorage()
+
+                    name = savefile.save(uploaded_file.name, uploaded_file)  # gets the name of the file
+                    print(name)
+
+                    # we need to save the file somewhere in the project, MEDIA
+                    # now lets do the savings
+
+                    d = os.getcwd()  # how we get the current dorectory
+                    file_directory = d + '\media\\' + name  # saving the file in the media directory
+                    print(file_directory)
+                    readfile(file_directory)
+                    return redirect(result)
+
+
+                    #return HttpResponse('<html><body>111 </body></html>')
+                else:
+                    messages.warning(request, 'File was not uploaded. Please use .csv file extension!')
+                    return redirect(index)
+
 
 
     # starting
     else:
         link_form = UploadLinkForm()
         context['link_form'] = link_form
-        file_form = UploadFileForm()
-        context['file_form'] = file_form
+
         return render(request, "index.html", context)
+
+
+def readfile(filename):
+
+    #we have to create those in order to be able to access it around
+    # use panda to read the file because i can use DATAFRAME to read the file
+    #column;culumn2;column
+    global rows, columns, data
+
+    my_file = pd.read_csv(filename, sep='[:;,|_]')
+
+    data = pd.DataFrame(data=my_file, index=None)
+    print(data)
+
+    rows = len(data.axes[0])
+    columns = len(data.axes[1])
 
 
 
@@ -80,21 +123,7 @@ def download(url: str):
                 #f.close()
     readfile(completename)
 
-def readfile(filename):
 
-    global columns, data
-    my_file = pd.read_csv(filename, sep='[:;,|_]', engine='python')
-
-    data = pd.DataFrame(data=my_file, index=None)
-    #print(data)
-
-    global columns
-    columns = []
-    for col_name in data.columns:
-        columns.append(col_name)
-        #print(col_name)
-
-    #print('columns', columns) # created the list of array with columns name
 
 
 
@@ -111,15 +140,15 @@ def result(request):
 
     # creating choices based on columns name of the file
     columns_list = []
-    for i in columns:
+    for i in data.columns:
         columns_list.append((i, i))
     # columns_list = ( ('x1','x1'), ('x2','x2)) ....
 
     columns_form = ColumnsForm(columns_list)
     context['columns_form'] = columns_form # pass this list of choices in html template
 
-    dashboard_dict = vizualization(columns[0])
-    columnsname_choice = columns[0] # prepare the defaulted columns representation
+    dashboard_dict = vizualization(data.columns[0])
+    columnsname_choice = data.columns[0] # prepare the defaulted columns representation
     context['columnsname_choice'] = columnsname_choice
 
     #print('default', dashboard_dict)
