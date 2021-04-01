@@ -104,6 +104,8 @@ def readfile(filename):
 
     data = pd.DataFrame(data=my_file, index=None)
     data.replace({'{': ' ', '}': ' ', '/': ' ', ':': ' ', '.': ' '}, regex=True)
+    data.dropna(inplace=True)
+
     print(data)
 
     rows = len(data.axes[0])
@@ -169,6 +171,7 @@ def result(request):
 
     listkeys = []
     listvalues = []
+    tmp = []
 
     for x in keys:
         listkeys.append(x)
@@ -176,8 +179,8 @@ def result(request):
     for y in values:
         listvalues.append(y)
 
-    #print('---->', listkeys)
-    #print('---->', listvalues)
+    # print('---->', listkeys)
+    # print('---->', listvalues)
     context['listkeys'] = listkeys
     context['listvalues'] = listvalues
 
@@ -198,6 +201,7 @@ def result(request):
         values = dashboard_dict.values()
         for x in keys:
             listkeys.append(x)
+
 
         for y in values:
             listvalues.append(y)
