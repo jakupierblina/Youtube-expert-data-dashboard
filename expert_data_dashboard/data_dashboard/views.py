@@ -97,9 +97,13 @@ def readfile(filename):
     #column;culumn2;column
     global rows, columns, data
 
-    my_file = pd.read_csv(filename, sep='[:;,|_]')
+    my_file = pd.read_csv(filename, sep='[;|]', engine='python')
+
+    print('Contents of Dataframe : ')
+    print(my_file)
 
     data = pd.DataFrame(data=my_file, index=None)
+    data.replace({'{': ' ', '}': ' ', '/': ' ', ':': ' ', '.': ' '}, regex=True)
     print(data)
 
     rows = len(data.axes[0])
