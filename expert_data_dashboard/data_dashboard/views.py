@@ -18,43 +18,36 @@ from io import StringIO
 # Create your views here.
 def index(request):
     context = {}
+    global  file, link
 
 
     if request.method == 'POST':
 
         link_form = UploadLinkForm(request.POST)
-        uploaded_file = request.FILES['document']
+        uploaded_file = request.FILES.get('document')
+        file = uploaded_file
+        link = link_form
+        global files_name
 
 
         if link_form.is_valid() or uploaded_file :
 
             url = request.POST.get('link_field', False)
 
-            files_name = uploaded_file.name
-
-
-
             # if both forms are empty
-            if not files_name and not url:
+            if not uploaded_file and not url:
                 messages.warning(request, 'Warning: Input is required. Please chose only ONE of the forms!')
                 return redirect(index)
 
             # if the user chosed both forms
-            if files_name and url:
+            if uploaded_file and url:
                 messages.warning(request, 'Warning:  Please chose only ONE of the forms!')
                 return redirect(index)
 
+            # user uploaded a file
+            if uploaded_file:
+                files_name = uploaded_file.name
 
-            # if user chosed a link
-            if not files_name:
-                print('you chosed to upload a link')
-                response = urllib.request.urlopen(url)
-                # parse the file object
-                download(url)
-                return redirect(result)
-
-            # if user chosed a file
-            elif not url:
                 print('you chosed to upload a file')
                 if uploaded_file.name.endswith('.csv'):
                     savefile = FileSystemStorage()
@@ -71,11 +64,21 @@ def index(request):
                     readfile(file_directory)
                     return redirect(result)
 
-
-                    #return HttpResponse('<html><body>111 </body></html>')
+                    # return HttpResponse('<html><body>111 </body></html>')
                 else:
                     messages.warning(request, 'File was not uploaded. Please use .csv file extension!')
                     return redirect(index)
+
+
+            # user chosed a link
+            if url:
+                print('you chosed to upload a link')
+                response = urllib.request.urlopen(url)
+                # parse the file object
+                download(url)
+                return redirect(result)
+
+
 
 
 
@@ -129,6 +132,11 @@ def download(url: str):
 
 def result(request):
     context = {}
+
+    # Which form the user chosed
+    context['file'] = file
+    context['link'] = link
+
 
     # create the ChartJs Choice field
     vizualization_form = VizualizationForm()
