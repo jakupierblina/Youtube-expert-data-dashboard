@@ -97,7 +97,7 @@ def readfile(filename):
     #column;culumn2;column
     global rows, columns, data
 
-    my_file = pd.read_csv(filename, sep='[;|]', engine='python')
+    my_file = pd.read_csv(filename, sep='[|]', engine='python')
 
     print('Contents of Dataframe : ')
     print(my_file)
